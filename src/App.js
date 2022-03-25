@@ -1,25 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  state = { time: 0, };
+  
+  timer = null;
+
+  tick = () => this.setState({
+    time: this.state.time + 1,
+  });
+
+  componentDidMount() {
+    this.timer = setInterval(this.tick, 1000);
+  }
+  
+  componentWillUnmount() {
+    clearInterval(this.timer);
+  }
+
+  render() {
+    return <h2>{this.state.time} </h2>
+  }
 }
 
-export default App;
+export default App
